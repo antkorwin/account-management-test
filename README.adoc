@@ -1,0 +1,24 @@
+# Account management system API
+
+
+UML classes diagram:
+
+image:./docs/uml.png["unl"]
+
+
+### The list of technologies
+
+- google guice
+- undertow web server
+- lombok
+- mapstruct
+- junit5
+- mockito
+- assertj
+- rest assured
+
+### My own libraries
+- xsync
+- stress-test
+
+

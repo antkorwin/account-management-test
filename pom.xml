@@ -16,6 +16,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+        <jacoco-maven-plugin.version>0.8.4</jacoco-maven-plugin.version>
 
         <guice.version>4.2.2</guice.version>
         <undertow.version>2.0.28.Final</undertow.version>
@@ -190,7 +191,28 @@
                 </configuration>
             </plugin>
 
-            <!--- region SUREFIRE -->
+
+            <!-- region tests report -->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <!-- attached to Maven test phase -->
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -203,7 +225,8 @@
                     </includes>
                 </configuration>
             </plugin>
-            <!--- endregion SUREFIRE -->
+            <!--- endregion tests report -->
+
 
             <!-- region Build an executable JAR with all dependencies -->
             <plugin>
