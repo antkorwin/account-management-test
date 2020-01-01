@@ -1,10 +1,17 @@
 # Account management system API
 
+image:https://travis-ci.com/antkorwin/account-management-test.svg?branch=master["Build Status", link="https://travis-ci.com/antkorwin/account-management-test"]
+image:https://codecov.io/gh/antkorwin/account-management-test/branch/master/graph/badge.svg[link ="https://codecov.io/gh/antkorwin/account-management-test"]
 
-UML classes diagram:
+## UML
+
+classes diagram:
 
 image:./docs/uml.png["unl"]
 
+## API
+
+image:./docs/swagger.png["swagger]
 
 ### The list of technologies
 

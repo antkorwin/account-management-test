@@ -49,4 +49,10 @@ class WebServerTest {
 		assertThat(ex.getMessage()).contains("Connection refused");
 	}
 
+	@Test
+	void tryToStopNotStartedServer() {
+		RuntimeException ex = Assertions.assertThrows(RuntimeException.class,
+		                                              () -> new WebServer().stop());
+		assertThat(ex.getMessage()).isEqualTo("Server not started yet.");
+	}
 }
