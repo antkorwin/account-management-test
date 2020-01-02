@@ -11,7 +11,6 @@ import account.management.system.controller.dto.in.CreateTransferDto;
 import account.management.system.controller.dto.out.TransferDto;
 import account.management.system.model.Account;
 import account.management.system.repository.AccountRepository;
-import account.management.system.repository.TransferRepository;
 import account.management.system.webserver.WebServer;
 import com.jupiter.tools.stress.test.concurrency.ExecutionMode;
 import com.jupiter.tools.stress.test.concurrency.StressTestRunner;
@@ -25,6 +24,9 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class TransferControllerStressTest {
+
+	private static final int ITERATION_COUNT = 1000;
+	private static final int THREAD_COUNT = 8;
 
 	private AccountRepository accountRepository;
 
@@ -48,8 +50,8 @@ class TransferControllerStressTest {
 
 		StressTestRunner.test()
 		                .mode(ExecutionMode.EXECUTOR_MODE)
-		                .iterations(1000)
-		                .threads(8)
+		                .iterations(ITERATION_COUNT)
+		                .threads(THREAD_COUNT)
 		                // prevents from deadlocks in tests
 		                .timeout(1, TimeUnit.MINUTES)
 		                // each iteration we select two random accounts and
