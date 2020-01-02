@@ -55,4 +55,23 @@ class WebServerTest {
 		                                              () -> new WebServer().stop());
 		assertThat(ex.getMessage()).isEqualTo("Server not started yet.");
 	}
+
+	@Test
+	void startOnDifferentPort() {
+		HttpHandler test = exchange -> exchange.getResponseSender().send("Hello 2020!");
+
+		WebServer server = new WebServer().hostPort("127.0.0.1", 9090)
+		                                  .router(routing().add(Methods.GET, "/test", new BlockingHandler(test)))
+		                                  .start();
+
+		RestAssured.given()
+		           .port(9090)
+		           .get("/test")
+		           .then()
+		           .assertThat()
+		           .body(equalTo("Hello 2020!"))
+		           .statusCode(200);
+
+		server.stop();
+	}
 }
