@@ -48,6 +48,12 @@ public interface AccountRepository {
 	 */
 	Account create(String name, BigDecimal balance);
 
-
+	/**
+	 * Set new value of a balance to selected account
+	 *
+	 * @param accountId id of account
+	 * @param newValue  new value of a balance
+	 * @return updated account
+	 */
 	Account updateBalance(Long accountId, BigDecimal newValue);
 }

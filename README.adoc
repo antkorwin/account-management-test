@@ -11,18 +11,18 @@ image:./docs/uml.png["unl"]
 
 ### The list of technologies
 
-- google guice
-- undertow web server
-- lombok
-- mapstruct
-- junit5
-- mockito
-- assertj
-- rest assured
+- link:https://github.com/google/guice[Google Guice]
+- link:https://github.com/undertow-io/undertow[Undertow WebServer]
+- link:https://projectlombok.org/[Lombok]
+- link:https://mapstruct.org/[MapStruct]
+- link:https://github.com/junit-team/junit5[JUnit5]
+- link:https://site.mockito.org/[Mockito]
+- link:https://joel-costigliola.github.io/assertj/[AssertJ]
+- link:http://rest-assured.io/[Rest-Assured]
 
 ### My own libraries
-- xsync
-- stress-test
+- link:https://github.com/antkorwin/xsync[XSync]
+- link:https://github.com/jupiter-tools/stress-test[StressTest]
 
 
 ## API
@@ -134,5 +134,45 @@ image:./docs/swagger.png["swagger]
 
 ----
 
+## How to Build
+
+[source]
+----
+> mvn clean package
+
+...
+
+[INFO] -------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] -------------------------------------------
+[INFO] Total time:  17.450 s
+[INFO] Finished at: 2020-01-02T19:56:02+10:00
+[INFO] -------------------------------------------
+----
+
+## How to Run
+
+[source]
+----
+> java -jar ./target/account-management-test-1.0-SNAPSHOT-jar-with-dependencies.jar
+
+...
+
+[XNIO-1 I/O-11] DEBUG org.xnio.nio - Started channel thread 'XNIO-1 I/O-11'
+[XNIO-1 I/O-12] DEBUG org.xnio.nio - Started channel thread 'XNIO-1 I/O-12'
+[XNIO-1 Accept] DEBUG org.xnio.nio - Started channel thread 'XNIO-1 Accept'
+[main] DEBUG io.undertow - Configuring listener with protocol HTTP for interface localhost and port 8080
+[main] INFO account.management.system.webserver.WebServer -
+---------------------------------------------------------
+   __
+   \ \_____
+###[==_____>             Successfully start web server
+   /_/      __           io.undertow.Undertow@6404f418
+            \ \_____     at http://127.0.0.1:8080
+         ###[==_____>
+            /_/
+---------------------------------------------------------
+
+----
 
 

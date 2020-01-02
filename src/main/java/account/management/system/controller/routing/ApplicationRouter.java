@@ -30,6 +30,8 @@ public class ApplicationRouter implements Router {
 				// transfers
 				.add(Methods.POST, "/transfers/create", new BlockingHandler(transferController::create))
 				.add(Methods.GET, "/transfers/{id}", new BlockingHandler(transferController::get))
-				.add(Methods.GET, "/transfers/list", new BlockingHandler(transferController::getAll));
+				.add(Methods.GET, "/transfers/list", new BlockingHandler(transferController::getAll))
+				// health-check
+				.add(Methods.GET, "/health", e -> e.getResponseSender().send("up"));
 	}
 }
