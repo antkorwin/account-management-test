@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class TransferDto {
     private Long id;
     private Long fromAccountId;

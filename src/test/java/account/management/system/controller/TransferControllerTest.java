@@ -6,6 +6,7 @@ import java.util.List;
 
 import account.management.system.Application;
 import account.management.system.controller.dto.in.CreateTransferDto;
+import account.management.system.controller.dto.out.ErrorDto;
 import account.management.system.controller.dto.out.TransferDto;
 import account.management.system.model.Account;
 import account.management.system.model.Transfer;
@@ -87,15 +88,60 @@ class TransferControllerTest {
 		Date before = new Date();
 		// Act
 		Long dateTime = RestAssured.given()
-		                             .contentType(ContentType.JSON)
-		                             .body(createDto)
-		                             .post("/transfers/create")
-		                             .then()
-		                             .extract()
-		                             .path("dateTime");
+		                           .contentType(ContentType.JSON)
+		                           .body(createDto)
+		                           .post("/transfers/create")
+		                           .then()
+		                           .extract()
+		                           .path("dateTime");
 		// Assert
 		Date after = new Date();
 		assertThat(new Date(dateTime)).isBetween(before, after, true, true);
+	}
+
+	@Test
+	void notEnoughMoneyToTransfer() {
+		// Arrange
+		Account firstAccount = accountRepository.create("first-name", BigDecimal.valueOf(10));
+		Account secondAccount = accountRepository.create("second-name", BigDecimal.valueOf(0));
+		CreateTransferDto createDto = new CreateTransferDto(firstAccount.getId(),
+		                                                    secondAccount.getId(),
+		                                                    1000L);
+		// Act
+		ErrorDto errorDto = RestAssured.given()
+		                               .contentType(ContentType.JSON)
+		                               .body(createDto)
+		                               .post("/transfers/create")
+		                               .then()
+		                               // Assert
+		                               .statusCode(StatusCodes.INTERNAL_SERVER_ERROR)
+		                               .extract()
+		                               .body()
+		                               .as(ErrorDto.class);
+
+		assertThat(errorDto.getMessage()).isEqualTo("There is not enough money on the source account balance.");
+	}
+
+	@Test
+	void sourceAccountNotFound() {
+		// Arrange
+		Account secondAccount = accountRepository.create("second-name", BigDecimal.valueOf(0));
+		CreateTransferDto createDto = new CreateTransferDto(123L,
+		                                                    secondAccount.getId(),
+		                                                    1000L);
+		// Act
+		ErrorDto errorDto = RestAssured.given()
+		                               .contentType(ContentType.JSON)
+		                               .body(createDto)
+		                               .post("/transfers/create")
+		                               .then()
+		                               // Assert
+		                               .statusCode(StatusCodes.INTERNAL_SERVER_ERROR)
+		                               .extract()
+		                               .body()
+		                               .as(ErrorDto.class);
+
+		assertThat(errorDto.getMessage()).isEqualTo("Source account not found");
 	}
 
 	@Test
