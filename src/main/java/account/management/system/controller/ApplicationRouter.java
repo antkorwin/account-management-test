@@ -26,6 +26,7 @@ public class ApplicationRouter implements Router {
 				.add(Methods.GET, "/accounts/{id}", new BlockingHandler(accountController::get))
 				.add(Methods.GET, "/accounts/list", new BlockingHandler(accountController::getAll))
 				// transfers
-				.add(Methods.POST, "/transfers/create", new BlockingHandler(transferController::create));
+				.add(Methods.POST, "/transfers/create", new BlockingHandler(transferController::create))
+				.add(Methods.GET, "/transfers/{id}", new BlockingHandler(transferController::get));
 	}
 }
