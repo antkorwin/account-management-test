@@ -13,7 +13,6 @@ public class WebServerModule extends AbstractModule {
 
 	@Override
 	protected void configure() {
-
 		bind(Router.class).to(ApplicationRouter.class);
 	}
 
