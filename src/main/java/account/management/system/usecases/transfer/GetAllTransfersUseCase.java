@@ -5,15 +5,18 @@ import java.util.List;
 
 import account.management.system.model.Transfer;
 import account.management.system.repository.TransferRepository;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import lombok.RequiredArgsConstructor;
 
 
-@RequiredArgsConstructor
-public class GetHistoryUseCase {
+@Singleton
+@RequiredArgsConstructor(onConstructor_ = {@Inject})
+public class GetAllTransfersUseCase {
 
 	private final TransferRepository transferRepository;
 
-	public List<Transfer> getAll(){
+	public List<Transfer> getAll() {
 		return transferRepository.getAll();
 	}
 }

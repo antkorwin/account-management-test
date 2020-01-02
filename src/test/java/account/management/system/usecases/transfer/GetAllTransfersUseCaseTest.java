@@ -14,15 +14,15 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 
-class GetHistoryUseCaseTest {
+class GetAllTransfersUseCaseTest {
 
 	private TransferRepository transferRepository;
-	private GetHistoryUseCase getHistoryUseCase;
+	private GetAllTransfersUseCase getAllTransfersUseCase;
 
 	@BeforeEach
 	void setUp() {
 		transferRepository = mock(TransferRepository.class);
-		getHistoryUseCase = new GetHistoryUseCase(transferRepository);
+		getAllTransfersUseCase = new GetAllTransfersUseCase(transferRepository);
 	}
 
 	@Test
@@ -30,8 +30,8 @@ class GetHistoryUseCaseTest {
 		// Arrange
 		when(transferRepository.getAll()).thenReturn(Collections.emptyList());
 		// Act & assert
-		assertThat(getHistoryUseCase.getAll()).isNotNull()
-		                                      .hasSize(0);
+		assertThat(getAllTransfersUseCase.getAll()).isNotNull()
+		                                           .hasSize(0);
 	}
 
 	@Test
@@ -42,9 +42,9 @@ class GetHistoryUseCaseTest {
 		when(transferRepository.getAll()).thenReturn(Arrays.asList(firstTransfer,
 		                                                           secondTransfer));
 		//Act & assert
-		assertThat(getHistoryUseCase.getAll()).isNotNull()
-		                                      .hasSize(2)
-		                                      .containsExactly(firstTransfer, secondTransfer);
+		assertThat(getAllTransfersUseCase.getAll()).isNotNull()
+		                                           .hasSize(2)
+		                                           .containsExactly(firstTransfer, secondTransfer);
 
 		verify(transferRepository).getAll();
 	}

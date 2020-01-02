@@ -2,11 +2,14 @@ package account.management.system.controller;
 
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import account.management.system.controller.dto.in.CreateTransferDto;
+import account.management.system.controller.dto.out.TransferDto;
 import account.management.system.controller.mapper.TransferMapper;
 import account.management.system.model.Transfer;
 import account.management.system.usecases.transfer.CreateTransferUseCase;
+import account.management.system.usecases.transfer.GetAllTransfersUseCase;
 import account.management.system.usecases.transfer.GetTransferUseCase;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.inject.Inject;
@@ -26,6 +29,7 @@ public class TransferController {
 
 	private final CreateTransferUseCase createTransferUseCase;
 	private final GetTransferUseCase getTransferUseCase;
+	private final GetAllTransfersUseCase getAllTransfersUseCase;
 	private final ObjectMapper objectMapper;
 	private final TransferMapper transferMapper;
 
@@ -52,6 +56,15 @@ public class TransferController {
 		exchange.setStatusCode(StatusCodes.OK);
 		exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "application/json");
 		exchange.getResponseSender().send(objectMapper.writeValueAsString(transferMapper.toDto(transfer)));
-		log.info("Get Account : {}", transfer);
+		log.info("Get Transfer : {}", transfer);
+	}
+
+	@SneakyThrows
+	public void getAll(HttpServerExchange exchange) {
+		List<TransferDto> result = transferMapper.toListDto(getAllTransfersUseCase.getAll());
+		exchange.setStatusCode(StatusCodes.OK);
+		exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "application/json");
+		exchange.getResponseSender().send(objectMapper.writeValueAsString(result));
+		log.info("Get All Transfers : {}", result);
 	}
 }

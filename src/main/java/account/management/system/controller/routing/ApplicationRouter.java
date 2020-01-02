@@ -1,6 +1,8 @@
-package account.management.system.controller;
+package account.management.system.controller.routing;
 
 
+import account.management.system.controller.AccountController;
+import account.management.system.controller.TransferController;
 import account.management.system.webserver.Router;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -27,6 +29,7 @@ public class ApplicationRouter implements Router {
 				.add(Methods.GET, "/accounts/list", new BlockingHandler(accountController::getAll))
 				// transfers
 				.add(Methods.POST, "/transfers/create", new BlockingHandler(transferController::create))
-				.add(Methods.GET, "/transfers/{id}", new BlockingHandler(transferController::get));
+				.add(Methods.GET, "/transfers/{id}", new BlockingHandler(transferController::get))
+				.add(Methods.GET, "/transfers/list", new BlockingHandler(transferController::getAll));
 	}
 }
