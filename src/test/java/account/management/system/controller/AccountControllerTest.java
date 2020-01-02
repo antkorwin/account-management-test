@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import account.management.system.config.AccountModule;
+import account.management.system.config.PropertiesReaderModule;
+import account.management.system.config.WebServerModule;
 import account.management.system.controller.dto.in.CreateAccountDto;
 import account.management.system.controller.dto.out.AccountDto;
 import account.management.system.model.Account;
@@ -33,21 +35,17 @@ class AccountControllerTest {
 	private static final String SECOND_TEST_NAME = "second-test-name";
 	private static final BigDecimal SECOND_TEST_BALANCE = BigDecimal.valueOf(100);
 
-	private AccountController controller;
 	private AccountRepository repository;
 	private WebServer server;
 
 	@BeforeEach
 	void setUp() {
-		Injector injector = Guice.createInjector(new AccountModule());
-		controller = injector.getInstance(AccountController.class);
-		repository = injector.getInstance(AccountRepository.class);
+		Injector injector = Guice.createInjector(new PropertiesReaderModule(),
+		                                         new WebServerModule(),
+		                                         new AccountModule());
 
-		server = new WebServer().hostPort("localhost", 8080)
-		                        .router(routing().add(Methods.POST, "/accounts/create", new BlockingHandler(controller::create))
-		                                         .add(Methods.GET, "/accounts/{id}", new BlockingHandler(controller::get))
-		                                         .add(Methods.GET, "/accounts/list", new BlockingHandler(controller::getAll)))
-		                        .start();
+		server = injector.getInstance(WebServer.class).start();
+		repository = injector.getInstance(AccountRepository.class);
 	}
 
 	@AfterEach
