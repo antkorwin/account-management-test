@@ -134,5 +134,45 @@ image:./docs/swagger.png["swagger]
 
 ----
 
+## How to Build
+
+[source]
+----
+> mvn clean package
+
+...
+
+[INFO] -------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] -------------------------------------------
+[INFO] Total time:  17.450 s
+[INFO] Finished at: 2020-01-02T19:56:02+10:00
+[INFO] -------------------------------------------
+----
+
+## How to Run
+
+[source]
+----
+> java -jar ./target/account-management-test-1.0-SNAPSHOT-jar-with-dependencies.jar
+
+...
+
+[XNIO-1 I/O-11] DEBUG org.xnio.nio - Started channel thread 'XNIO-1 I/O-11'
+[XNIO-1 I/O-12] DEBUG org.xnio.nio - Started channel thread 'XNIO-1 I/O-12'
+[XNIO-1 Accept] DEBUG org.xnio.nio - Started channel thread 'XNIO-1 Accept'
+[main] DEBUG io.undertow - Configuring listener with protocol HTTP for interface localhost and port 8080
+[main] INFO account.management.system.webserver.WebServer -
+---------------------------------------------------------
+   __
+   \ \_____
+###[==_____>             Successfully start web server
+   /_/      __           io.undertow.Undertow@6404f418
+            \ \_____     at http://127.0.0.1:8080
+         ###[==_____>
+            /_/
+---------------------------------------------------------
+
+----
 
 
