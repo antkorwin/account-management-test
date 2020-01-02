@@ -1,7 +1,7 @@
 package account.management.system.config;
 
 
-import account.management.system.controller.ApplicationRouter;
+import account.management.system.controller.routing.ApplicationRouter;
 import account.management.system.webserver.Router;
 import account.management.system.webserver.WebServer;
 import com.google.inject.AbstractModule;

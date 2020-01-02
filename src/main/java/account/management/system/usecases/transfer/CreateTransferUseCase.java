@@ -8,10 +8,12 @@ import account.management.system.model.Transfer;
 import account.management.system.repository.AccountRepository;
 import account.management.system.repository.TransferRepository;
 import com.antkorwin.xsync.XSync;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import lombok.RequiredArgsConstructor;
 
-
-@RequiredArgsConstructor
+@Singleton
+@RequiredArgsConstructor(onConstructor_ = {@Inject})
 public class CreateTransferUseCase {
 
 	private final TransferRepository transferRepository;

@@ -3,6 +3,7 @@ package account.management.system.controller;
 import java.math.BigDecimal;
 import java.util.List;
 
+import account.management.system.Application;
 import account.management.system.config.AccountModule;
 import account.management.system.config.PropertiesReaderModule;
 import account.management.system.config.WebServerModule;
@@ -10,6 +11,7 @@ import account.management.system.controller.dto.in.CreateAccountDto;
 import account.management.system.controller.dto.out.AccountDto;
 import account.management.system.model.Account;
 import account.management.system.repository.AccountRepository;
+import account.management.system.repository.TransferRepository;
 import account.management.system.webserver.WebServer;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -36,21 +38,18 @@ class AccountControllerTest {
 	private static final BigDecimal SECOND_TEST_BALANCE = BigDecimal.valueOf(100);
 
 	private AccountRepository repository;
-	private WebServer server;
 
 	@BeforeEach
 	void setUp() {
-		Injector injector = Guice.createInjector(new PropertiesReaderModule(),
-		                                         new WebServerModule(),
-		                                         new AccountModule());
-
-		server = injector.getInstance(WebServer.class).start();
-		repository = injector.getInstance(AccountRepository.class);
+		Application.main(new String[]{});
+		repository = Application.getInjector().getInstance(AccountRepository.class);
 	}
 
 	@AfterEach
 	void tearDown() {
-		server.stop();
+		Application.getInjector()
+		           .getInstance(WebServer.class)
+		           .stop();
 	}
 
 	@Test

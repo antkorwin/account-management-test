@@ -58,10 +58,11 @@ public class AccountController {
 	}
 
 	@SneakyThrows
-	public void getAll(HttpServerExchange exchange){
+	public void getAll(HttpServerExchange exchange) {
 		List<AccountDto> result = accountMapper.toListDto(getAllAccountsUseCase.getAll());
 		exchange.setStatusCode(StatusCodes.OK);
 		exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "application/json");
 		exchange.getResponseSender().send(objectMapper.writeValueAsString(result));
+		log.info("Get All Accounts: {}", result);
 	}
 }

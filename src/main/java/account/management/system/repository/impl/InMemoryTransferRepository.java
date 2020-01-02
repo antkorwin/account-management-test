@@ -7,10 +7,13 @@ import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
+import javax.inject.Singleton;
+
 import account.management.system.model.Transfer;
 import account.management.system.repository.TransferRepository;
 
 
+@Singleton
 public class InMemoryTransferRepository implements TransferRepository {
 
 	private final ConcurrentHashMap<Long, Transfer> storage;

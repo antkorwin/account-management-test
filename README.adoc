@@ -9,10 +9,6 @@ classes diagram:
 
 image:./docs/uml.png["unl"]
 
-## API
-
-image:./docs/swagger.png["swagger]
-
 ### The list of technologies
 
 - google guice
@@ -27,5 +23,116 @@ image:./docs/swagger.png["swagger]
 ### My own libraries
 - xsync
 - stress-test
+
+
+## API
+
+image:./docs/swagger.png["swagger]
+
+- create new account
+
+[source]
+----
+> curl -XPOST 127.0.0.1:8080/accounts/create -d '{"name":"first","balance":1000}'
+
+{
+    "id" : 1,
+    "name" : "first",
+    "balance" : 1000
+}
+
+
+> curl -XPOST 127.0.0.1:8080/accounts/create -d '{"name":"second","balance":100}'
+
+{
+    "id" : 1,
+    "name" : "second",
+    "balance" : 100
+}
+----
+
+- get an account by id
+[source]
+----
+> curl 127.0.0.1:8080/accounts/1
+
+{
+    "id" : 1,
+    "name" : "first",
+    "balance" : 1000
+}
+----
+
+- get a list with all accounts
+[source]
+----
+> curl 127.0.0.1:8080/accounts/list
+
+[
+   {
+      "balance" : 1000,
+      "id" : 1,
+      "name" : "first"
+   },
+   {
+      "balance" : 100,
+      "id" : 2,
+      "name" : "second"
+   }
+]
+----
+
+- create money transfer from the first account to the second
+[source]
+----
+> curl -XPOST 127.0.0.1:8080/transfers/create -d '{"fromAccountId":1,"toAccountId":2,"value":1000}'
+
+{
+   "id" : 1,
+   "fromAccountId" : 1,
+   "toAccountId" : 2,
+   "value" : 1000,
+   "dateTime" : 1577949064878
+}
+----
+
+- get the transfer entity by id
+[source]
+----
+> curl 127.0.0.1:8080/transfers/1
+
+{
+   "id" : 1,
+   "fromAccountId" : 1,
+   "toAccountId" : 2,
+   "value" : 1000,
+   "dateTime" : 1577949064878
+}
+----
+
+- get a list with all transfers
+[source]
+----
+> curl 127.0.0.1:8080/transfers/list
+
+[
+   {
+      "id" : 1,
+      "fromAccountId" : 1,
+      "dateTime" : 1577949064878,
+      "value" : 1000,
+      "toAccountId" : 2
+   },
+   {
+      "dateTime" : 1577949246196,
+      "value" : 700,
+      "toAccountId" : 1,
+      "id" : 2,
+      "fromAccountId" : 2
+   }
+]
+
+----
+
 
 
