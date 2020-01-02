@@ -23,7 +23,8 @@ public class CreateTransferUseCase {
 	public Transfer create(Long fromAccountId,
 	                       Long toAccountId,
 	                       BigDecimal value) {
-
+		// synchronized on values of multiple keys (account IDs)
+		// with deadlock prevention by XSync(this is my own library)
 		return xsync.evaluate(fromAccountId, toAccountId, () -> {
 
 			Account source = accountRepository.getById(fromAccountId);

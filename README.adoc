@@ -11,18 +11,18 @@ image:./docs/uml.png["unl"]
 
 ### The list of technologies
 
-- google guice
-- undertow web server
-- lombok
-- mapstruct
-- junit5
-- mockito
-- assertj
-- rest assured
+- link:https://github.com/google/guice[Google Guice]
+- link:https://github.com/undertow-io/undertow[Undertow WebServer]
+- link:https://projectlombok.org/[Lombok]
+- link:https://mapstruct.org/[MapStruct]
+- link:https://github.com/junit-team/junit5[JUnit5]
+- link:https://site.mockito.org/[Mockito]
+- link:https://joel-costigliola.github.io/assertj/[AssertJ]
+- link:http://rest-assured.io/[Rest-Assured]
 
 ### My own libraries
-- xsync
-- stress-test
+- link:https://github.com/antkorwin/xsync[XSync]
+- link:https://github.com/jupiter-tools/stress-test[StressTest]
 
 
 ## API
