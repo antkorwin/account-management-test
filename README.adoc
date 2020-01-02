@@ -24,6 +24,10 @@ image:./docs/uml.png["unl"]
 - link:https://github.com/antkorwin/xsync[XSync]
 - link:https://github.com/jupiter-tools/stress-test[StressTest]
 
+### CI
+- link:https://travis-ci.com/antkorwin/account-management-test[Travis-CI]
+- link:https://codecov.io/gh/antkorwin/account-management-test[CodeCov]
+
 
 ## API
 
@@ -35,6 +39,8 @@ image:./docs/swagger.png["swagger]
 ----
 > curl -XPOST 127.0.0.1:8080/accounts/create -d '{"name":"first","balance":1000}'
 
+// status-code: 201
+
 {
     "id" : 1,
     "name" : "first",
@@ -43,6 +49,8 @@ image:./docs/swagger.png["swagger]
 
 
 > curl -XPOST 127.0.0.1:8080/accounts/create -d '{"name":"second","balance":100}'
+
+// status-code: 201
 
 {
     "id" : 1,
@@ -56,6 +64,8 @@ image:./docs/swagger.png["swagger]
 ----
 > curl 127.0.0.1:8080/accounts/1
 
+// status-code: 200
+
 {
     "id" : 1,
     "name" : "first",
@@ -67,6 +77,8 @@ image:./docs/swagger.png["swagger]
 [source]
 ----
 > curl 127.0.0.1:8080/accounts/list
+
+// status-code: 200
 
 [
    {
@@ -87,6 +99,8 @@ image:./docs/swagger.png["swagger]
 ----
 > curl -XPOST 127.0.0.1:8080/transfers/create -d '{"fromAccountId":1,"toAccountId":2,"value":1000}'
 
+// status-code: 201
+
 {
    "id" : 1,
    "fromAccountId" : 1,
@@ -101,6 +115,8 @@ image:./docs/swagger.png["swagger]
 ----
 > curl 127.0.0.1:8080/transfers/1
 
+// status-code: 200
+
 {
    "id" : 1,
    "fromAccountId" : 1,
@@ -114,6 +130,8 @@ image:./docs/swagger.png["swagger]
 [source]
 ----
 > curl 127.0.0.1:8080/transfers/list
+
+// status-code: 200
 
 [
    {
@@ -132,6 +150,18 @@ image:./docs/swagger.png["swagger]
    }
 ]
 
+----
+
+- example of the error handling
+[source]
+----
+> curl -XPOST 127.0.0.1:8080/transfers/create -d '{"fromAccountId":1,"toAccountId":2,"value":99999}'
+
+// status-code: 500
+
+{
+   "message" : "There is not enough money on the source account balance."
+}
 ----
 
 ## How to Build
