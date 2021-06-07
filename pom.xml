@@ -34,7 +34,7 @@
         <stress-test.version>0.1</stress-test.version>
 
         <log4j2.version>2.12.1</log4j2.version>
-        <logback.version>1.1.7</logback.version>
+        <logback.version>1.2.0</logback.version>
     </properties>
 
 
