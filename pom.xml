@@ -19,7 +19,7 @@
         <jacoco-maven-plugin.version>0.8.4</jacoco-maven-plugin.version>
 
         <guice.version>4.2.2</guice.version>
-        <undertow.version>2.0.28.Final</undertow.version>
+        <undertow.version>2.2.15.Final</undertow.version>
         <xsync.version>1.3</xsync.version>
         <jackson.version>2.10.1</jackson.version>
 
